@@ -25,6 +25,7 @@ jobs:
 
       - name: Create JSONS
         run: python create-jsons.py
+        working-directory: ./data
 
       - name: Build project
         run: npm run build
