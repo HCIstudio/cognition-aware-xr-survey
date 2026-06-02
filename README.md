@@ -1,4 +1,4 @@
-# Ind(ier) Survey Tool<!-- omit from toc -->
+# Cognition-Aware Virtual and Augmented Reality - Survey Overview Website<!-- omit from toc -->
 
 This repository forks the [Indy Survey Tool](https://github.com/VisDunneRight/Indy-Survey-Tool) and introduces a number of changes for web responsiveness and flexibility of the survey dataset format. Since the overall style is different than that of the original, we host it separately. Big props to the folks at the [Khoury Vis Lab](https://github.com/VisDunneRight) for their initiative. 
 
