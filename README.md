@@ -13,7 +13,7 @@ This repository hosts the survey data and website from the WIP survey paper "Cog
 5. GitHub Actions (see the related [workflow](/.github/workflows/deploy.yml)) is used to automatically redeploy the website anytime a new commit is made on the `main`-branch.
 
 ## Importing Original Survey Data in Bulk
-1. The [`Survey-Info.csv`](/src/data/Survey-Info.csv) file contains the core corpus described in the paper. 
+1. The [`raw-data.csv`](/src/data/raw-data.csv) file contains the core corpus described in the paper. 
    1. The taxonomy columns accept lists of strings (comma-separated), or marks ("x") for values that apply. 
    2. `Name`, `Year`, `Authors` (comma separated), `DOI`, `Bibtex`, and `Source` are required.
 2. Create the config and data JSON files: 

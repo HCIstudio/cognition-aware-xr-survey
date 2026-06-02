@@ -27,7 +27,7 @@ jobs:
         run: npm ci
 
       - name: Create JSONS
-        run: python create-jsons.py
+        run: python create-jsons.py -n "Cognition-Aware Virtual and Augmented Reality" -d "Supplementary Website to the Literature Survey" -a "Jana Gonnermann-Müller and Christopher Katins and Christopher Lazik and Thomas Kosch" -g "https://github.com/HCIstudio/cognition-aware-xr-survey"
         working-directory: src/data
 
       - name: Build project

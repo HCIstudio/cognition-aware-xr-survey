@@ -1,0 +1,74 @@
+{
+    "meta": [
+        {
+            "name": "Year",
+            "type": "Timeline"
+        },
+        {
+            "name": "Authors",
+            "type": "MultiSelect"
+        },
+        {
+            "name": "Name",
+            "type": "String"
+        },
+        {
+            "name": "Bibtex",
+            "type": "String"
+        },
+        {
+            "name": "DOI",
+            "type": "String"
+        },
+        {
+            "name": "CategoryOne",
+            "type": "MultiSelect"
+        },
+        {
+            "name": "CategoryTwo",
+            "type": "MultiSelect"
+        },
+        {
+            "name": "CategoryThree",
+            "type": "MultiSelect"
+        }
+    ],
+    "data": [
+        {
+            "Year": "2020",
+            "Authors": [
+                "First Last",
+                "First2 Last2"
+            ],
+            "Name": "Sample1",
+            "Bibtex": "@inproceedings{sample1}",
+            "DOI": "10.1111/0.1",
+            "CategoryOne": [
+                "PropertyC1One"
+            ],
+            "CategoryTwo": [
+                "PropertyC2One"
+            ],
+            "CategoryThree": [
+                "PropertyC3One"
+            ]
+        },
+        {
+            "Year": "2006",
+            "Authors": [
+                "First Last",
+                "First2 Last2"
+            ],
+            "Name": "Sample2",
+            "Bibtex": "@inproceedings{sample2}",
+            "DOI": "10.1111/0.2",
+            "CategoryOne": [
+                "PropertyC1Two"
+            ],
+            "CategoryTwo": [
+                "PropertyC2Two"
+            ],
+            "CategoryThree": []
+        }
+    ]
+}

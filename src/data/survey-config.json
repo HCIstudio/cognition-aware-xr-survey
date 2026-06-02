@@ -1,0 +1,59 @@
+{
+    "filterBy": [
+        {
+            "groupName": "GroupOne",
+            "categories": [
+                {
+                    "name": "CategoryOne",
+                    "values": [
+                        "PropertyC1One",
+                        "PropertyC1Two"
+                    ]
+                },
+                {
+                    "name": "CategoryTwo",
+                    "values": [
+                        "PropertyC2One",
+                        "PropertyC2Two"
+                    ]
+                }
+            ]
+        },
+        {
+            "groupName": "GroupTwo",
+            "categories": [
+                {
+                    "name": "CategoryThree",
+                    "values": [
+                        "PropertyC3One"
+                    ]
+                }
+            ]
+        }
+    ],
+    "detailView": {
+        "view": "normal",
+        "show": [
+            "CategoryOne",
+            "CategoryTwo",
+            "CategoryThree"
+        ]
+    },
+    "summaryView": {
+        "view": "text",
+        "showImg": true,
+        "show": []
+    },
+    "topView": {
+        "title": "Cognition-Aware Virtual and Augmented Reality",
+        "description": "Supplementary Website to the Literature Survey",
+        "authors": "Jana Gonnermann-M\u00fcller and Christopher Katins and Christopher Lazik and Thomas Kosch",
+        "addEntry": {
+            "description": [
+                "If you know a peer-reviewed published work that presents a contribution missing in our browser, please submit an entry!",
+                "Filling out the form below will create a json entry that can be added to an issue in our Github repository."
+            ],
+            "github": "https://github.com/HCIstudio/cognition-aware-xr-survey"
+        }
+    }
+}

@@ -46,7 +46,7 @@ def get_arguments():
     parser = argparse.ArgumentParser(description='Python script for converting csv to JSON for Indy.'
                                                  'Generates a config and data file.',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-i', '--input-file', type=str, default="Survey-Info.csv",
+    parser.add_argument('-i', '--input-file', type=str, default="raw-data.csv",
                         dest="filename", help='The files that gets parsered.')
     parser.add_argument('-o','--only-data', action='store_true', default=False,
                         dest="onlydata", help='generate only the data file')
