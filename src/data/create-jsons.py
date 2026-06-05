@@ -4,41 +4,51 @@ import argparse
 import logging
 
 # properties without a filter or view
-excludeProp = ["Name", "Authors", "Year", "DOI", "Bibtex"]
+excludeProp = ["Name", "Authors", "Year", "DOI"]#, "Bibtex"]
 
-optionals = ["Optional Category"]
+optionals = ["Framing"]
 
 # categories that will be shown in the website
 includeProp = {
   # fixed
   "Name":"String",
   "Authors": "MultiSelect",
-  "Bibtex": "String",
+  #"Bibtex": "String",
   "DOI": "String",
   "Year": "Timeline",
   
   # custom categories
-  "CategoryOne": "MultiSelect",
-  "CategoryTwo": "MultiSelect",
-  "CategoryThree": "MultiSelect",
+  "AR/VR": "MultiSelect",
+  "Device Type": "MultiSelect",
+
+  "Eval Outcomes": "MultiSelect"
+
+
+  #"Device": "MultiSelect",
+  #"Application": "MultiSelect",
+  #"Cognitive State": "MultiSelect"
 }
 
 # properties that will be read from the csv, indexed to their supergroups
 categories = {
-  "PropertyC1One": "CategoryOne",
-  "PropertyC1Two": "CategoryOne",
+  "AR": "AR/VR",
+  "VR": "AR/VR",
   
-  "PropertyC2One": "CategoryTwo", 
-  "PropertyC2Two": "CategoryTwo", 
+  "HMD": "Device Type", 
+  "HHD": "Device Type",
+  "Desktop": "Device Type",
+  "Cave/360": "Device Type",
+  "Misc": "Device Type",
           
-  "PropertyC3One": "CategoryThree",
-  "PropertyC4Two": "CategoryThree",
+  "Usability": "Eval Outcomes",
+  "Effectiveness": "Eval Outcomes",
+  "None": "Eval Outcomes"
 }
 
 groups = { 
-  "CategoryOne": "GroupOne",
-  "CategoryTwo": "GroupOne",
-  "CategoryThree": "GroupTwo"
+  "AR/VR": "Goals",
+  "Device Type": "Goals",
+  "Eval Outcomes": "Evaluation"
 }
 
 def get_arguments():
@@ -47,7 +57,7 @@ def get_arguments():
                                                  'Generates a config and data file.',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-i', '--input-file', type=str, default="raw-data.csv",
-                        dest="filename", help='The files that gets parsered.')
+                        dest="filename", help='The file that gets parsed.')
     parser.add_argument('-o','--only-data', action='store_true', default=False,
                         dest="onlydata", help='generate only the data file')
     parser.add_argument('-n','--name', type=str, 
