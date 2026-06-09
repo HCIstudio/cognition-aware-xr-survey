@@ -671,7 +671,4 @@
     pointer-events: none;
     opacity: .4;
   }
-  .hidden {
-    display: none
-  }
 </style>
