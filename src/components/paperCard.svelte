@@ -14,6 +14,22 @@
 	let open = false;
 </script>
 
+<style>
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.15rem;
+    padding-bottom: 5px;
+    padding-top: 2px;
+    font-size: 0.8rem;
+  }
+  .sep {
+    color: #d1d5db;
+    margin: 0 0.1rem;
+  }
+</style>
+
 <Modal title="Paper Details" size='lg' id='modal' bind:open={open} outsideclose autoclose={false}>
 	<PaperDetail {paper} detailView={structure.detailView} {meta} />
 </Modal>
@@ -26,8 +42,11 @@
 	<div class="grid grid-cols-7">
 		<div class="ml-2 col-span-6" style="position:relative;">
 			<span class="dark:text-white">{paper.Name} </span>
-			<div class="text-gray-400" style="display:flex;padding-bottom:5px;padding-top:2px">
-				{#if paper.source} <Multiselect list={[paper.source]}/>&nbsp; {/if} {paper.Year}
+			<div class="text-gray-400 card-meta">
+				{#if paper.source}<Multiselect list={[paper.source]}/>&nbsp;{/if}
+				<span>{paper.Year}</span>
+				{#if paper.Publisher?.length}<span class="sep">·</span><span>{paper.Publisher.join(", ")}</span>{/if}
+				{#if paper["AR/VR"]?.length}<span class="sep">·</span><span>{paper["AR/VR"].join(", ")}</span>{/if}
 			</div>
 		</div>
 		<div class="">
