@@ -19,7 +19,7 @@
   export let data;
   export let selectedDimX;
   export let selectedDimY;
-  let maxColorValue = 10;
+  let maxColorValue = 5;
   let maxPaperValue = 100;
   let horBarId = -1;
   let verBarId = -1;
@@ -260,21 +260,22 @@
   }
 
   $: maxPaperValue = getMaxCount(visData);
-  $: maxColorValue = maxPaperValue;
 
   let w = 100, h = 100;
 </script>
 
-<div class="corr-menu corr-hidable hidden">
-  <P style={"padding-left:26px"}>Max Color Value: {maxColorValue}</P>
-  <div>
-    <Range 
+<div class="corr-menu corr-hidable">
+  <div style="display:flex; align-items:center; gap:0.75rem; padding-left:20px;">
+    <P style="white-space:nowrap">Amount of papers to saturate color: <span class="color-value">{maxColorValue}</span></P>
+    <span class="slider-bound">0</span>
+    <Range
       bind:value={maxColorValue}
       min={0}
       max={maxPaperValue}
       step={1}
       id="Discrete slider"
     />
+    <span class="slider-bound" style="white-space:nowrap">{maxPaperValue} (max. in current view)</span>
   </div>
 </div>
 
@@ -628,7 +629,19 @@
 <style>
   .corr-menu {
     padding-top: 10px;
-    width: 200px;
+    width: 700px;
+  }
+  .color-value {
+    color: var(--primary-light);
+    font-weight: 600;
+  }
+  .slider-bound {
+    font-size: 0.75rem;
+    color: #6b7280;
+    white-space: nowrap;
+  }
+  :global(.dark) .slider-bound {
+    color: #9ca3af;
   }
   .model-text {
     cursor: pointer;

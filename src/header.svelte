@@ -21,6 +21,7 @@
   } from "flowbite-svelte-icons";
   import surveys from "./data/other-surveys.json";
   import AddEntry from "./components/addEntry.svelte";
+  import hciLogo from "./assets/hcistudio-logo.png";
 
   let open = false;
   let menu;
@@ -54,9 +55,12 @@
 
       <NavBrand class="items-left">
         {#if topView.title}
-          <Heading tag="h6">
-            {topView.title}
-          </Heading>
+          <div class="title-block">
+            <Heading tag="h6">{topView.title}</Heading>
+            {#if topView.description}
+              <span class="subtitle">{topView.description}</span>
+            {/if}
+          </div>
         {/if}
       </NavBrand>
 
@@ -123,6 +127,10 @@
       </Button>
 
       <Modal title="About this survey" bind:open={menu} size="lg" outsideclose>
+        <div class="about-logo-row">
+          <img src={hciLogo} alt="HCIstudio" class="about-logo" />
+        </div>
+
         <div>
           <P>{topView.title}: {topView.description}</P>
           {#if topView.authors}
@@ -181,6 +189,35 @@
 </header>
 
 <style>
+  .title-block {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .subtitle {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-top: 1px;
+    letter-spacing: 0.01em;
+  }
+  :global(.dark) .subtitle {
+    color: #9ca3af;
+  }
+  .about-logo-row {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  :global(.dark) .about-logo-row {
+    border-bottom-color: #1a3535;
+  }
+  .about-logo {
+    height: 56px;
+    width: auto;
+    border-radius: 8px;
+  }
   .modal-footer {
     display: flex;
     align-items: center;
@@ -194,10 +231,13 @@
   }
   :global(.dark) .modal-footer {
     color: #9ca3af;
-    border-top-color: #374151;
+    border-top-color: #1a3535;
   }
   .sep {
-    color: #d1d5db;
+    color: #c4dada;
+  }
+  :global(.dark) .sep {
+    color: #1a4a4a;
   }
 </style>
 

@@ -277,8 +277,13 @@
   bind:activateClickOutside
   id="sidebar"
 >
-  <div class="flex">
-    <Heading tag="h5">{structure.topView.title}</Heading>
+  <div class="flex items-start justify-between">
+    <div>
+      <Heading tag="h5">{structure.topView.title}</Heading>
+      {#if structure.topView.description}
+        <p class="drawer-subtitle">{structure.topView.description}</p>
+      {/if}
+    </div>
     <Button
       pill={true}
       outline
@@ -366,5 +371,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .drawer-subtitle {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-top: 1px;
+    letter-spacing: 0.01em;
+  }
+  :global(.dark) .drawer-subtitle {
+    color: #9ca3af;
   }
 </style>

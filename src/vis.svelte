@@ -66,7 +66,7 @@
       </div>
       
       <div class="flexy">
-        <div class="flex flex-wrap space-x-1 pb-3 items-center corr-hidable hidden">
+        <div class="flex flex-wrap space-x-1 pb-3 items-center corr-hidable">
           <P style="padding-left:20px">X-Axis:</P>
           {#each choicesDim as dim}
             <Button
@@ -82,7 +82,7 @@
           {/each}
         </div>
 
-        <div class="flex flex-wrap space-x-1 items-center corr-hidable hidden">
+        <div class="flex flex-wrap space-x-1 items-center corr-hidable">
           <P style="padding-left:20px">Y-Axis:</P>
           {#each choicesDim as dim}
             <Button
