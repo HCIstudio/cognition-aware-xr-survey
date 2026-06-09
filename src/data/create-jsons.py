@@ -2,11 +2,12 @@ import csv
 import json
 import argparse
 import logging
+import os
 
 # properties without a filter or view
 excludeProp = ["Name", "Authors", "Year", "DOI"]#, "Bibtex"]
 
-optionals = ["Framing"]
+optionals = []
 
 # categories that will be shown in the website
 includeProp = {
@@ -20,35 +21,132 @@ includeProp = {
   # custom categories
   "AR/VR": "MultiSelect",
   "Device Type": "MultiSelect",
+  "Device": "MultiSelect",
 
-  "Eval Outcomes": "MultiSelect"
+  "Input": "MultiSelect",
 
+  "Cognitive State": "MultiSelect",
 
-  #"Device": "MultiSelect",
-  #"Application": "MultiSelect",
-  #"Cognitive State": "MultiSelect"
+  "Adaptation": "MultiSelect",
+
+  "Application": "MultiSelect",
+
+  "Method": "MultiSelect",
+  "Outcomes": "MultiSelect",
+
+  "System Maturity": "MultiSelect",
+  "Open Source": "MultiSelect"
 }
 
 # properties that will be read from the csv, indexed to their supergroups
 categories = {
-  "AR": "AR/VR",
-  "VR": "AR/VR",
+  "Augmented Reality (AR)": "AR/VR",
+  "Virtual Reality (VR)": "AR/VR",
   
-  "HMD": "Device Type", 
-  "HHD": "Device Type",
+  "Head-Mounted Display (HMD)": "Device Type", 
+  "Handheld Display (HHD)": "Device Type",
   "Desktop": "Device Type",
-  "Cave/360": "Device Type",
-  "Misc": "Device Type",
+  "Cave Automatic Virtual Environment (CAVE)": "Device Type",
+  "Miscellaneous": "Device Type",
+
+  "HoloLens 1": "Device",
+  "HoloLens 2": "Device",
+  "Meta Quest 3": "Device",
+  "Meta Quest Pro": "Device",
+  "Apple Vision Pro": "Device",
+  "HTC Vive Pro": "Device",
+  "HTC Vive": "Device",
+  "HP Omnicept": "Device",
+  "Google Cardboard": "Device",
+  "Pico Neo3 Pro Eye": "Device",
+  "Valve Index VR": "Device",
+  "Meta Quest 2": "Device",
+  "Google Daydream VR headset": "Device",
+  "HoloLens": "Device",
+  "Oculus Rift": "Device",
+  "Brother AirScouter": "Device",
+  "FOVE 0": "Device",
+  "None": "Device",
+  "No Info": "Device",
+  "Novel Prototype": "Device",
+
+  "Electrocardiogram (ECG)": "Input",
+  "Electrodermal Activity (EDA)": "Input",
+  "Electroencephalography (EEG)": "Input",
+  "Electromyography (EMG)": "Input",
+  "Eye-Tracking: Gaze": "Input",
+  "Eye-Tracking: Pupil Dilation": "Input",
+  "Eye-Tracking: Blink Rate": "Input",
+  "Functional Near-Infrared Spectroscopy (fNIRS)": "Input",
+  "Galvanic Skin Response (GSR)": "Input",
+  "Heart Rate (HR)": "Input",
+  "Heart Rate Variability (HRV)": "Input",
+  "Photoplethysmogram (PPG)": "Input",
+  "Respiration": "Input",
+  "Self-Report": "Input",
+
+  "Arousal": "Cognitive State",
+  "Stress": "Cognitive State",
+  "Attention": "Cognitive State",
+  "Emotions/Affect": "Cognitive State",
+  "Cognitive Load/Workload": "Cognitive State",
+  "Confusion": "Cognitive State",
+  "Presence": "Cognitive State",
+  "Relaxation": "Cognitive State",
+  "Discomfort": "Cognitive State",
+  "Engagement": "Cognitive State",
+
+  "Task Adjustment": "Adaptation",
+  "FoV/Rendering": "Adaptation",
+  "Guidance/Notification": "Adaptation",
+  "Information": "Adaptation",
+  "Event": "Adaptation",
+  "Stimuli": "Adaptation",
+
+  "Education": "Application",
+  "Recreation": "Application",
+  "Health/Rehabilitation": "Application",
+  "Work/Performance": "Application",
+  "Miscellaneous": "Application",
+
+  "Qualitative (Participant Study)": "Method",
+  "Quantitative (Participant Study)": "Method",
+  "Requirement Analysis": "Method",
+  "Inference Statistics": "Method",
+  "Descriptive Statistics": "Method",
+  "None": "Method",
           
-  "Usability": "Eval Outcomes",
-  "Effectiveness": "Eval Outcomes",
-  "None": "Eval Outcomes"
+  "Usability": "Outcomes",
+  "Effectiveness": "Outcomes",
+  "None": "Outcomes",
+
+  "Proposal": "System Maturity",
+  "Subsystem": "System Maturity",
+  "Prototype": "System Maturity",
+
+  "No Info": "Open Source",
+  "Data Available": "Open Source",
+  "Code Available": "Open Source"
 }
 
 groups = { 
-  "AR/VR": "Goals",
-  "Device Type": "Goals",
-  "Eval Outcomes": "Evaluation"
+  "AR/VR": "Technology",
+  "Device Type": "Technology",
+  "Device": "Technology",
+
+  "Input": "Input",
+
+  "Cognitive State": "Cognitive State",
+
+  "Adaptation": "Adaptation",
+
+  "Application": "Application",
+  
+  "Method": "Evaluation",
+  "Outcomes": "Evaluation",
+
+  "System Maturity": "Meta",
+  "Open Source": "Meta"
 }
 
 def get_arguments():
@@ -60,20 +158,44 @@ def get_arguments():
                         dest="filename", help='The file that gets parsed.')
     parser.add_argument('-o','--only-data', action='store_true', default=False,
                         dest="onlydata", help='generate only the data file')
-    parser.add_argument('-n','--name', type=str, 
-                        default="Example Title",
-                        dest="surveyname", help='sets the website title')
-    parser.add_argument('-d','--desc', type=str, 
-                        default="Example Description",
-                        dest="surveydesc", help='sets the website description')
-    parser.add_argument('-a','--authors', type=str, 
-                        default="<anonymized for submission>",
-                        dest="surveyauthors", help='sets the website authors')
-    parser.add_argument('-g','--github', type=str, 
-                        default="<anonymized for submission>",
-                        dest="github", help='sets the website link to Github')
+    parser.add_argument('-m','--meta', type=str, default="survey-meta.json",
+                        dest="metafile", help='JSON file with survey name, description, authors, and github URL')
+    parser.add_argument('-n','--name', type=str, default=None,
+                        dest="surveyname", help='overrides the survey title from the meta file')
+    parser.add_argument('-d','--desc', type=str, default=None,
+                        dest="surveydesc", help='overrides the survey description from the meta file')
+    parser.add_argument('-a','--authors', type=str, default=None,
+                        dest="surveyauthors", help='overrides the survey authors from the meta file')
+    parser.add_argument('-g','--github', type=str, default=None,
+                        dest="github", help='overrides the GitHub URL from the meta file')
 
     return parser.parse_args()
+
+
+def load_meta(args):
+    """ Load survey metadata from file, with CLI args as overrides """
+    meta = {
+        "name": "Example Title",
+        "description": "Example Description",
+        "authors": "<anonymized for submission>",
+        "github": "<anonymized for submission>"
+    }
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    meta_path = os.path.join(script_dir, args.metafile)
+    if os.path.exists(meta_path):
+        with open(meta_path, encoding='utf-8') as f:
+            meta.update(json.load(f))
+    else:
+        print(f"Note: meta file '{meta_path}' not found, using defaults.")
+    if args.surveyname is not None:
+        meta["name"] = args.surveyname
+    if args.surveydesc is not None:
+        meta["description"] = args.surveydesc
+    if args.surveyauthors is not None:
+        meta["authors"] = args.surveyauthors
+    if args.github is not None:
+        meta["github"] = args.github
+    return meta
 
 class CustomFormatter(logging.Formatter):    
     yellow = '\x1b[38;5;226m'
@@ -95,7 +217,8 @@ class CustomFormatter(logging.Formatter):
 
 def main():
   args = get_arguments()
-  
+  meta = load_meta(args)
+
   logger = logging.getLogger(__name__)
   
   stdout_handler = logging.StreamHandler()
@@ -115,14 +238,14 @@ def main():
         "show":[] #Add properties that you want to view on summary view
       },
       "topView":{
-        "title":args.surveyname,
-        "description":args.surveydesc,
-        "authors":args.surveyauthors,
+        "title":meta["name"],
+        "description":meta["description"],
+        "authors":meta["authors"],
         "addEntry": {
           "description":[
-            "If you know a peer-reviewed published work that presents a contribution missing in our browser, please submit an entry!", 
+            "If you know a peer-reviewed published work that presents a contribution missing in our browser, please submit an entry!",
             "Filling out the form below will create a json entry that can be added to an issue in our Github repository."],
-          "github":args.github
+          "github":meta["github"]
         }
       }
     }
