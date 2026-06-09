@@ -1,0 +1,20 @@
+{
+    "_template": {
+        "Name": "",
+        "Year": "",
+        "Authors": [""],
+        "DOI": "",
+        "AR/VR": [""],
+        "Device Type": [""],
+        "Device": [""],
+        "Input": [""],
+        "Cognitive State": [""],
+        "Adaptation": [""],
+        "Application": [""],
+        "Method": [""],
+        "Outcomes": [""],
+        "System Maturity": [""],
+        "Open Source": [""]
+    },
+    "data": []
+}

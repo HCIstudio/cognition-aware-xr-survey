@@ -8,6 +8,12 @@
   import Vis from "./vis.svelte";
   import structure from "./data/survey-config.json";
   import dataMeta from "./data/survey-data.json";
+  import appendData from "./data/survey-data-append.json";
+
+  // Merge manually-appended papers into the generated dataset
+  if (appendData.data?.length) {
+    dataMeta.data.push(...appendData.data);
+  }
   import { searchFilter, timeFilters, filterBy } from "./store";
   import { sineIn } from "svelte/easing";
   import SearchField from "./components/searchField.svelte";
