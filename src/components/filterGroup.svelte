@@ -86,11 +86,15 @@
 
           filterBy.update(_ => f);
         }}>
-				{#if selected.includes(value)}
-				<CheckOutline class="w-3 h-3 mr-1"/>
-				{/if}
-				{"(" + (freqGroup?.[value] ?? 0) + ") " + value}
-				</Button
+          <span class="filter-btn-inner">
+            <span class="filter-btn-icon">
+              {#if selected.includes(value)}
+                <CheckOutline class="w-3 h-3"/>
+              {/if}
+            </span>
+            <span>{"(" + (freqGroup?.[value] ?? 0) + ") " + value}</span>
+          </span>
+        </Button
       >
     {/each}
   </div>
@@ -119,4 +123,15 @@
 </AccordionItem>
 
 <style>
+  .filter-btn-inner {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .filter-btn-icon {
+    flex-shrink: 0;
+    width: 1rem;
+    margin-right: 0.25rem;
+    margin-top: 1px;
+  }
 </style>
