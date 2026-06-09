@@ -57,22 +57,21 @@
           f.forEach((filter) => {
             if ("groupName" in filter) {
               filter.categories.forEach((cate) => {
-                if (cate.values.includes(value)) {
+                if (cate.name === name && cate.values.includes(value)) {
                   if (!cate.selected.includes(value)) {
                     cate.selected.push(value);
                   } else {
                     cate.selected = cate.selected.filter(i => i !== value);
                   }
-                    
                   return;
                 }
               });
             } else {
-              if (filter.values.includes(value)) {
+              if (filter.name === name && filter.values.includes(value)) {
                 if (!filter.selected.includes(value)) {
                   filter.selected.push(value);
                 } else {
-                  filter.selected = filter.selected.filter(i => i !== value)
+                  filter.selected = filter.selected.filter(i => i !== value);
                 }
                 return;
               }
