@@ -6,3 +6,6 @@ dist/
 output/
 package-lock.json
 node_modules/
+
+src/data/survey-config.json
+src/data/survey-data.json
