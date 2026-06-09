@@ -14,14 +14,12 @@
 	let open = false;
 </script>
 
-<Tooltip trigger="click" triggeredBy={"#entry-"+index} placement="left">Copied Bibtex to clipboard!</Tooltip>
-
 <Modal title="Paper Details" size='lg' id='modal' bind:open={open} outsideclose autoclose={false}>
 	<PaperDetail {paper} detailView={structure.detailView} {meta} />
 </Modal>
 
-<Card 
-	on:click={() => {open = true;}} 
+<Card
+	on:click={() => {open = true;}}
 	class="w-full m-1 dark:bg-[#212125] dark:shadow-xl"
 	style="cursor: pointer;max-width: 95%;float:right"
 	padding="none">
@@ -35,7 +33,7 @@
 		<div class="">
 			<Button on:click={
 					(event) => {
-						event.stopPropagation(); 
+						event.stopPropagation();
 						window.open(paper.DOI.startsWith('10') ? 'https://doi.org/' + paper.DOI : paper.DOI);
 					}
 				} outline={true} size='xs' pill={true} class="!p-2 mb-2 mr-0.5 border-0 float-right">
@@ -45,12 +43,13 @@
 				<Button id={"entry-"+index}
 						on:click={
 						(event) => {
-							event.stopPropagation(); 
+							event.stopPropagation();
 							copyText(paper.Bibtex);
-						} 
+						}
 					} outline={true} size='xs' pill={true} class="!p-2 mb-2 mr-1 border-0 float-right">
 					<CopySolid class="w-4 h-4" />
 				</Button>
+				<Tooltip trigger="click" triggeredBy={"#entry-"+index} placement="left">Copied Bibtex to clipboard!</Tooltip>
 			{/if}
 		</div>
 	</div>

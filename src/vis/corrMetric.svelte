@@ -26,46 +26,42 @@
 
   //finds the correct metadata based on selected Dim
   function getDimInfo(selectedDim, filterBy) {
-    let selectProp = {};
+    let selectProp = undefined;
     let ind = -1;
+    // First pass: look for a top-level group or flat category match
     filterBy.forEach((prop, i) => {
       if ("groupName" in prop) {
         if (prop["groupName"] === selectedDim) {
           selectProp = prop;
           ind = i;
-          return;
         }
       } else {
         if (prop["name"] === selectedDim) {
           selectProp = prop;
           ind = i;
-          return;
         }
       }
     });
-    if (Object.keys(selectProp).length === 0) {
-      if (selectProp.color === undefined) {
-        const colorInd =
-          ind < defaultColors.length ? ind : ind % defaultColors.length;
-        selectProp.color = defaultColors[colorInd];
-      }
-      return selectProp;
+    // Second pass: only if nothing found yet, look inside group categories
+    if (selectProp === undefined) {
+      filterBy.forEach((prop, i) => {
+        if ("groupName" in prop) {
+          prop.categories.forEach((cate) => {
+            if (cate["name"] === selectedDim) {
+              selectProp = cate;
+              ind = i;
+            }
+          });
+        }
+      });
     }
-    //In the case the
-    filterBy.forEach((prop, i) => {
-      if ("groupName" in prop) {
-        prop.categories.forEach((cate) => {
-          if (cate["name"] === selectedDim) {
-            selectProp = cate;
-            ind = i;
-            return;
-          }
-        });
-      }
-    });
+    if (selectProp === undefined) {
+      selectProp = {};
+    }
     if (selectProp.color === undefined) {
-      const colorInd =
-        ind < defaultColors.length ? ind : ind % defaultColors.length;
+      const colorInd = ind >= 0
+        ? (ind < defaultColors.length ? ind : ind % defaultColors.length)
+        : 0;
       selectProp.color = defaultColors[colorInd];
     }
     return selectProp;

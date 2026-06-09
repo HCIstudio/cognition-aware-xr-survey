@@ -19,7 +19,7 @@
 
   const updateShowCount = (newCount) => {
     const temp = values.sort((a, b) => {
-      return freqGroup[b] - freqGroup[a];
+      return (freqGroup?.[b] ?? 0) - (freqGroup?.[a] ?? 0);
     });
     if (newCount > 0) {
       showCount = newCount;
@@ -90,7 +90,7 @@
 				{#if selected.includes(value)}
 				<CheckOutline class="w-3 h-3 mr-1"/>
 				{/if}
-				{"(" + freqGroup[value] + ") " + value}
+				{"(" + (freqGroup?.[value] ?? 0) + ") " + value}
 				</Button
       >
     {/each}

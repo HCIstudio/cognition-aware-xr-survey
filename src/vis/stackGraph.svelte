@@ -38,34 +38,33 @@
   function getDimInfo(selectedDim, filterBy) {
     let selectProp = undefined;
     let ind = -1;
+    // First pass: look for a top-level group or flat category match
     filterBy.forEach((prop, i) => {
       if ("groupName" in prop) {
         if (prop["groupName"] === selectedDim) {
           selectProp = prop;
           ind = i;
-          return;
         }
       } else {
         if (prop["name"] === selectedDim) {
           selectProp = prop;
           ind = i;
-          return;
         }
       }
     });
-    //In the case the
-    filterBy.forEach((prop, i) => {
-      if ("groupName" in prop) {
-        prop.categories.forEach((cate) => {
-          if (cate["name"] === selectedDim) {
-            selectProp = cate;
-            ind = i;
-            return;
-          }
-        });
-      }
-    });
-
+    // Second pass: only if nothing found yet, look inside group categories
+    if (selectProp === undefined) {
+      filterBy.forEach((prop, i) => {
+        if ("groupName" in prop) {
+          prop.categories.forEach((cate) => {
+            if (cate["name"] === selectedDim) {
+              selectProp = cate;
+              ind = i;
+            }
+          });
+        }
+      });
+    }
     return selectProp;
   }
 

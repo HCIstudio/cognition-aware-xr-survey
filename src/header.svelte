@@ -125,28 +125,32 @@
       <Modal title="About this survey" bind:open={menu} size="lg" outsideclose>
         <div>
           <P>{topView.title}: {topView.description}</P>
-              
-            {#if (topView.authors.length === 1)}
-              Author: <A href={topView.authors[0].orcid}>{topView.authors[0].name}</A>.
+          {#if topView.authors}
+            {#if Array.isArray(topView.authors)}
+              {#if topView.authors.length === 1}
+                Author: <A href={topView.authors[0].orcid}>{topView.authors[0].name}</A>.
+              {:else}
+                Authors:{#each topView.authors.slice(0, -1) as author}
+                  &nbsp;<A href={author.orcid}>{author.name}</A>,
+                {/each}
+                and <A href={topView.authors[topView.authors.length - 1].orcid}>{topView.authors[topView.authors.length - 1].name}</A>.
+              {/if}
+            {:else}
+              Authors: {topView.authors}.
             {/if}
-            {#if (topView.authors.length > 1)}
-              Authors:{#each topView.authors.filter((_, i) => i < (topView.authors.length - 1)) as author}
-                &nbsp;<A href={author.orcid}>{author.name}</A>,
-              {/each}
-              and <A href={topView.authors[topView.authors.length - 1].orcid}>{topView.authors[topView.authors.length - 1].name}</A>. 
-            {/if}
-        </div>
-        
-        
-        <div>
-          <P>Contact</P>
-          <div>This site lives in Github! Visit: <A href={topView.addEntry.github}>{topView.addEntry.github}</A>, maintained by <A href={topView.site.contact}>{topView.site.maintainer}</A>.</div>
+          {/if}
         </div>
 
         <div>
+          <P>TBD</P>
+          <div>This work is still under review. More information will be added in time.</div>
+        </div>
+
+        {#if topView.site?.["how-to"]}
+        <div>
           <P>How to cite: </P>
-          {topView.site["how-to"]} {#if (topView.site.doi)} <A href={topView.site.doi}>{topView.site.doi}</A> {/if}
-          {#if (topView.site.bib)}, or this .bib entry: 
+          {topView.site["how-to"]} {#if topView.site?.doi} <A href={topView.site.doi}>{topView.site.doi}</A> {/if}
+          {#if topView.site?.bib}, or this .bib entry:
           <pre style="white-space: break-spaces;padding-top:30px">
 {topView.site.bib[0]}
 {#each topView.site.bib.filter((_,i) => i !== 0 && i !== topView.site.bib.length - 1) as bib, i}
@@ -156,15 +160,18 @@
           </pre>
           {/if}
         </div>
+        {/if}
 
-        <div>
-          <P>Looking for more interactive surveys? Check out:</P>
-          <ul>
-            {#each surveys as survey}
-              <Li><A href={survey.url}>{survey.name}</A></Li>
-            {/each}
-          </ul>
+        <div class="modal-footer">
+          <span>© 2026</span>
+          <span class="sep">·</span>
+          <A href="https://hcistudio.org/impressum/">Legal Notice</A>
+          <span class="sep">·</span>
+          <A href="https://hcistudio.org/datenschutz/">Privacy Policy</A>
+          <span class="sep">·</span>
+          <span>Hosted on GitHub Pages (<A href={topView.addEntry.github}>view source</A>)</span>
         </div>
+
       </Modal>
 
       <DarkMode btnClass="!p-1 border-0" style="color:var(--primary)" />
@@ -172,4 +179,25 @@
     </div>
   </Navbar>
 </header>
+
+<style>
+  .modal-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: #6b7280;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  :global(.dark) .modal-footer {
+    color: #9ca3af;
+    border-top-color: #374151;
+  }
+  .sep {
+    color: #d1d5db;
+  }
+</style>
 

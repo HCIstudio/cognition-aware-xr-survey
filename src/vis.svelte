@@ -48,19 +48,19 @@
 <div class="vis-panel dark:bg-gray-900">
   <Accordion>
     <AccordionItem open={true}>
-      <div slot="header" style="display:flex">Correlation Matrix 
+      <div slot="header" style="display:flex">Correlation Matrix
         <Button
           pill={true}
           outline
           class="!p-1 border-0"
-          id="about"
+          id="corr-settings"
           on:click={(eve) =>  {
               eve.stopPropagation();
               showHideSettings("corr-hidable");
             }}
         >
           <CogOutline />
-          <Tooltip placement="bottom">Settings</Tooltip>
+          <Tooltip triggeredBy="#corr-settings" placement="bottom">Settings</Tooltip>
         </Button>
 
       </div>
@@ -113,14 +113,14 @@
           pill={true}
           outline
           class="!p-1 border-0"
-          id="about"
+          id="stack-settings"
           on:click={(eve) =>  {
               eve.stopPropagation();
               showHideSettings("stack-hidable");
             }}
         >
           <CogOutline />
-          <Tooltip placement="bottom">Settings</Tooltip>
+          <Tooltip triggeredBy="#stack-settings" placement="bottom">Settings</Tooltip>
         </Button>
 
       </div>

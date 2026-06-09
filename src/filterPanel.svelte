@@ -36,7 +36,7 @@
     $filterBy.forEach((prop) => {
       if (secondary && prop.values) {
         prop.valuesTemp = structuredClone(prop.values);
-        prop.values = prop.values.filter((c) => c.contains("(-)"));
+        prop.values = prop.values.filter((c) => c.includes("(-)"));
       } else if (!secondary && prop.values) {
         prop.values = prop.valuesTemp.filter((c) => c);
       }
