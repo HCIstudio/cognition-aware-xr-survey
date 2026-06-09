@@ -16,7 +16,7 @@ This repository hosts the survey data and website from the WIP survey paper "Cog
 
 1. The [`raw-data.csv`](/src/data/raw-data.csv) file contains the core corpus described in the paper.
    1. The taxonomy columns accept lists of strings (comma-separated), or marks ("x") for values that apply.
-   2. `Name`, `Year`, `Authors` (comma separated), `DOI`, `Bibtex`, and `Source` are required.
+   2. `Name`, `Year`, `Authors` (comma separated), `DOI`, `Publisher`, and `Bibtex` are required.
 2. Edit [`survey-meta.json`](/src/data/survey-meta.json) to set the survey title, description, authors (with ORCIDs), and GitHub URL. This file is read by the script and committed to the repository.
    ```json
    {
@@ -52,6 +52,8 @@ To add papers one-by-one after the cutoff date without re-running the script, ed
             "Year": "2025",
             "Authors": ["Last, First; Last, First"],
             "DOI": "https://doi.org/10.1000/example",
+            "Publisher": ["IEEE"],
+            "Bibtex": "@inproceedings{...",
             "AR/VR": ["Augmented Reality (AR)"],
             "Device Type": ["Head-Mounted Display (HMD)"],
             "Device": ["HoloLens 2"],
