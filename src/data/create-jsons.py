@@ -35,7 +35,8 @@ includeProp = {
   "Outcomes": "MultiSelect",
 
   "System Maturity": "MultiSelect",
-  "Open Source": "MultiSelect"
+  "Open Source": "MultiSelect",
+  "Publisher": "MultiSelect"
 }
 
 # properties that will be read from the csv, indexed to their supergroups
@@ -126,7 +127,10 @@ categories = {
 
   "No Info": "Open Source",
   "Data Available": "Open Source",
-  "Code Available": "Open Source"
+  "Code Available": "Open Source",
+
+  "ACM": "Publisher",
+  "IEEE": "Publisher"
 }
 
 groups = { 
@@ -146,7 +150,8 @@ groups = {
   "Outcomes": "Evaluation",
 
   "System Maturity": "Meta",
-  "Open Source": "Meta"
+  "Open Source": "Meta",
+  "Publisher": "Meta"
 }
 
 def get_arguments():
