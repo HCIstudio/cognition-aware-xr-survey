@@ -5,7 +5,7 @@ import logging
 import os
 
 # properties without a filter or view
-excludeProp = ["Name", "Authors", "Year", "DOI"]#, "Bibtex"]
+excludeProp = ["Name", "Authors", "Year", "DOI", "Bibtex"]
 
 optionals = []
 
@@ -14,7 +14,7 @@ includeProp = {
   # fixed
   "Name":"String",
   "Authors": "MultiSelect",
-  #"Bibtex": "String",
+  "Bibtex": "String",
   "DOI": "String",
   "Year": "Timeline",
   
