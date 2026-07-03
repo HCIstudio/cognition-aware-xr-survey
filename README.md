@@ -1,8 +1,8 @@
-# Cognition-Aware Virtual and Augmented Reality - Survey Overview Website<!-- omit from toc -->
+# Cognition-Aware Adaptation in Virtual and Augmented Reality - Survey Overview Website<!-- omit from toc -->
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/HCIstudio/cognition-aware-xr-survey/deploy.yml?label=Github%20Actions%20Deployment)
 
-This repository hosts the survey data and website from the WIP survey paper "Cognition-Aware Virtual and Augmented Reality". More information regarding this publication will be added over time.
+This repository hosts the survey data and website from the survey paper "Cognition-Aware Adaptation in Virtual and Augmented Reality". More information regarding this publication will be added over time.
 
 ## Building and Running the Webpage
 

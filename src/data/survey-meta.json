@@ -1,9 +1,9 @@
 {
-    "name": "Cognition-Aware Virtual and Augmented Reality",
+    "name": "Cognition-Aware Adaptation in Virtual and Augmented Reality",
     "description": "Supplementary Website to the Literature Survey",
     "authors": [
-        { "name": "Jana Gonnermann-Müller", "orcid": "https://orcid.org/0000-0002-0313-3779" },
         { "name": "Christopher Katins",     "orcid": "https://orcid.org/0000-0001-6257-7057" },
+        { "name": "Jana Gonnermann-Müller", "orcid": "https://orcid.org/0000-0002-0313-3779" },
         { "name": "Christopher Lazik",      "orcid": "https://orcid.org/0000-0002-8687-8548" },
         { "name": "Thomas Kosch",           "orcid": "https://orcid.org/0000-0001-6300-9035" }
     ],
